@@ -10,7 +10,9 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-
+//db
+import { mongoConnect } from "./db/db.js";
+mongoConnect();
 //server
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     const code = (error as any).statusCode || 404;
