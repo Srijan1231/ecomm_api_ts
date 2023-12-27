@@ -1,8 +1,9 @@
 import express, { NextFunction, Request, Response } from "express";
-import { hashPassword } from "../helper/bcrypt.js";
+import { comparePassword, hashPassword } from "../helper/bcrypt.js";
 import { CustomRequest, auth } from "../middleware/auth.js";
-import { newUserValidation } from "../middleware/joiValidation.js";
-import { insertUser } from "../model/user/userModel.js";
+import { loginValidation, newUserValidation } from "../middleware/joiValidation.js";
+import { getUserByEmail, insertUser } from "../model/user/userModel.js";
+import { createAccessJWT, createRefreshJWT } from "../helper/jwt.js";
 
 const router = express.Router();
 
@@ -50,6 +51,40 @@ router.post("/", newUserValidation, async (req: Request, res: Response, next: Ne
 
         next(error);
     }
+});
+
+router.post("/sign-in", loginValidation, async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { email, password } = req.body;
+
+        const user = await getUserByEmail(email);
+        if (user?._id) {
+            const isMatched = comparePassword(password, user.password);
+            if (isMatched) {
+                //create 2 jwts:
+
+                const accessJWT = await createAccessJWT(email);
+                const refreshJWT = await createRefreshJWT(email);
+
+                //// create accessJWT and store in session table: short live 15m
+                //// create refreshJWT and store with user data in user table: long live 30d
+
+                return res.json({
+                    status: "success",
+                    message: "LoggedIn",
+                    token: { accessJWT, refreshJWT },
+                });
+            }
+        }
+        res.json({
+            status: "error",
+            message: "Invalid login details",
+        });
+    } catch (error: any) {
+        next(error);
+
+    }
+
 });
 
 

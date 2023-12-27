@@ -1,8 +1,8 @@
 ### 
-POST http://localhost:8181/users
+POST http://localhost:8181/users/sign-in
 Content-Type: application/json
 
 {
-    "email": "a1221114141414142ss@a.com",
+    "email": "a1@a.com",
     "password": "1234567123"
 }
