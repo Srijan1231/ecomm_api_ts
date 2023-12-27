@@ -16,11 +16,14 @@ mongoConnect();
 import categoryRouter from './routes/categoryRouter.js';
 import paymentOptionRouter from './routes/paymentOptionRouter.js';
 import productRouter from './routes/productRouter.js';
+// import userRouter from './routes/userRouter.js';
+// import { auth } from "./middleware/authMiddleware.js";
 
 //api
 app.use("/category", categoryRouter);
 app.use("/paymentoptions", paymentOptionRouter);
 app.use("/products", productRouter);
+// app.use("/users", userRouter);
 //server
 app.get("/", (req: Request, res: Response) => {
     res.json({
@@ -32,6 +35,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     const code = (error as any).statusCode || 404;
     const message = error.message || "page not found";
+    console.log(message);
     res.status(code).json({
         status: "error",
         message,
