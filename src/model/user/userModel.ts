@@ -1,7 +1,7 @@
 import userSchema from "./userSchema.js";
 
 export const insertUser = (obj: Record<string, any>) => {
-    return new userSchema(obj).save().then((user) => user.toObject());
+    return new userSchema(obj).save();
 };
 
 export const getUserByEmail = (email: string) => {

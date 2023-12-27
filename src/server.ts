@@ -16,14 +16,14 @@ mongoConnect();
 import categoryRouter from './routes/categoryRouter.js';
 import paymentOptionRouter from './routes/paymentOptionRouter.js';
 import productRouter from './routes/productRouter.js';
-// import userRouter from './routes/userRouter.js';
+import userRouter from './routes/userRouter.js';
 // import { auth } from "./middleware/authMiddleware.js";
 
 //api
 app.use("/category", categoryRouter);
 app.use("/paymentoptions", paymentOptionRouter);
 app.use("/products", productRouter);
-// app.use("/users", userRouter);
+app.use("/users", userRouter);
 //server
 app.get("/", (req: Request, res: Response) => {
     res.json({

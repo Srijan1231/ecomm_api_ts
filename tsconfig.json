@@ -9,22 +9,13 @@
     "outDir": "./dist",
     "strict": true,
     "baseUrl": "./",
-    "paths": {
-      "@controllers": [
-        "src/controllers/index.js"
-      ],
-      "@router": [
-        "src/router/index.js"
-      ],
-      "@endPoints": [
-        "src/router/endPoints.enum.js"
-      ],
-      "@prisma": [
-        "src/config/PrismaClient.js"
-      ]
-    }
+    // "allowImportingTsExtensions": true,
+    // "emitDeclarationOnly": true,
+    // "declaration": true
   },
-  // "include": ["src/**/*"],
+  "include": [
+    "src/**/*"
+  ],
   // ts-node settings we added
   "ts-node": {
     "esm": true,
