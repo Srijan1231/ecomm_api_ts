@@ -29,3 +29,12 @@ Content-Type: application/json
 
 ###
 GET http://localhost:8181/users/get/access_jwt
+
+###
+DELETE {{rootAPI}}/users/delete
+Content-Type: application/json
+
+{
+    "_id": "658d901dde36a2dc5c7bf669",
+    "email":"a6@a.com"
+}

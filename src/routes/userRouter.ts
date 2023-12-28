@@ -2,9 +2,9 @@ import express, { NextFunction, Request, Response } from "express";
 import { comparePassword, hashPassword } from "../helper/bcrypt.js";
 import { CustomRequest, auth, refreshAuth } from "../middleware/auth.js";
 import { loginValidation, newUserValidation, updateUserValidation } from "../middleware/joiValidation.js";
-import { getUserByEmail, insertUser, updateUser, updateUserById } from "../model/user/userModel.js";
+import { deleteUser, getUserByEmail, insertUser, updateUser, updateUserById } from "../model/user/userModel.js";
 import { createAccessJWT, createRefreshJWT } from "../helper/jwt.js";
-import { deleteSession } from "../model/session/sessionModel.js";
+import { deleteManySession, deleteSession } from "../model/session/sessionModel.js";
 
 const router = express.Router();
 
@@ -113,7 +113,7 @@ router.post("/logout", async (req, res, next) => {
     }
 });
 
-router.put('/update', auth, async (req: Request, res: Response, next: NextFunction) => {
+router.put('/update', auth, updateUserValidation, async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { _id, password, ...rest } = req.body;
 
@@ -131,5 +131,26 @@ router.put('/update', auth, async (req: Request, res: Response, next: NextFuncti
         next(error);
     }
 });
+router.delete('/delete', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { _id, email } = req.body;
 
+        const user = await deleteUser(_id);
+        // console.log(user);
+        const session = await deleteManySession(email);
+
+        user && (session?.deletedCount > 0)
+            ? res.json({
+                status: "success",
+                message: 'The user has been deleted successfully along with its associated info'
+            }).status(200) : res.json({
+                status: "error",
+                message: 'Unable to delete the user'
+            }).status(500);
+
+
+    } catch (error) {
+        next(error);
+    }
+});
 export default router;
