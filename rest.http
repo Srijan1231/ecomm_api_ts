@@ -1,5 +1,6 @@
+@rootAPI=http://localhost:8181/api/store/ts
 ### 
-POST http://localhost:8181/users/logout
+POST {{rootAPI}}/users/logout
 Content-Type: application/json
 
 {
@@ -7,12 +8,24 @@ Content-Type: application/json
     "refreshJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImExQGEuY29tIiwiaWF0IjoxNzAzNzY1MzM4LCJleHAiOjE3MDYzNTczMzh9.dihMrecB4NJ0GZdkfLag4_mpOL9jYrEOL5636TD6XlE",
     "accessJWT":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImExQGEuY29tIiwiaWF0IjoxNzAzNzY1MjY5LCJleHAiOjE3MDM3NjYxNjl9._4GO4O6gOqK5zD-WJZZc-67V4VIteAn31jfzxxmBWBA"
 }
+###
+PUT {{rootAPI}}/users/update
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImE2QGEuY29tIiwiaWF0IjoxNzAzNzczNDQzLCJleHAiOjE3MDM3NzQzNDN9.zbAI_zLs9ZkqnFbFvwjOTC_FRnT0DLNjpl-wpgJuZOE
+
+{
+ "_id": "658d6911b398a7298c234261",
+"password":"hello12312"
+}
 
 ###
-POST http://localhost:8181/users/sign-in
+POST {{rootAPI}}/users/sign-in
 Content-Type: application/json
 
 {
     "email":"a6@a.com",
     "password":"123456790"
 }
+
+###
+GET http://localhost:8181/users/get/access_jwt

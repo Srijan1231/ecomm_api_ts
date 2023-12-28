@@ -1,8 +1,8 @@
 import express, { NextFunction, Request, Response } from "express";
 import { comparePassword, hashPassword } from "../helper/bcrypt.js";
-import { CustomRequest, auth } from "../middleware/auth.js";
-import { loginValidation, newUserValidation } from "../middleware/joiValidation.js";
-import { getUserByEmail, insertUser, updateUserById } from "../model/user/userModel.js";
+import { CustomRequest, auth, refreshAuth } from "../middleware/auth.js";
+import { loginValidation, newUserValidation, updateUserValidation } from "../middleware/joiValidation.js";
+import { getUserByEmail, insertUser, updateUser, updateUserById } from "../model/user/userModel.js";
 import { createAccessJWT, createRefreshJWT } from "../helper/jwt.js";
 import { deleteSession } from "../model/session/sessionModel.js";
 
@@ -87,6 +87,8 @@ router.post("/sign-in", loginValidation, async (req: Request, res: Response, nex
     }
 
 });
+router.get("/get/access_jwt", refreshAuth);
+
 router.post("/logout", async (req, res, next) => {
     try {
         const { accessJWT, refreshJWT, _id } = req.body;
@@ -97,6 +99,7 @@ router.post("/logout", async (req, res, next) => {
             const dt = await updateUserById(_id, { refreshJWT: "" });
             res.json({
                 status: "success",
+                message: "Come back soon"
             });
         }
         res.json({
@@ -110,6 +113,23 @@ router.post("/logout", async (req, res, next) => {
     }
 });
 
+router.put('/update', auth, async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { _id, password, ...rest } = req.body;
 
+        const result = await updateUser({ _id }, { password: password, ...rest });
+        result?._id
+            ? res.json({
+                status: "success",
+                message: "The user  has been updated successfully",
+            })
+            : res.json({
+                status: "error",
+                message: "Unable to update user, try again later",
+            });
+    } catch (error) {
+        next(error);
+    }
+});
 
 export default router;

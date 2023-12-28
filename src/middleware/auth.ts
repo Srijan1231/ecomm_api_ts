@@ -21,10 +21,10 @@ export const auth = async (req: CustomRequest, res: Response, next: NextFunction
         const { authorization } = req.headers;
 
         //2 decode or decrypt incoming jwt(it is always accessJWT) token 
-        const decodedJWT: any = verifyAccessJWT(authorization);
-
+        const decodedJWT: any = await verifyAccessJWT(authorization);
+        console.log(decodedJWT);
         //3 extract email from decodedJWT  and find user with that email
-        if (!decodedJWT.email) {
+        if (decodedJWT.email) {
             const user: any = await getUserByEmail(decodedJWT.email);
             if (user?._id) {
                 user.refreshJWT = undefined;
