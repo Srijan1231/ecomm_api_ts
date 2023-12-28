@@ -12,6 +12,9 @@ const sessionSchema = new mongoose.Schema({
         required: true,
         default: ''
     }
-});
+},
+    {
+        timestamps: true
+    });
 
 export default mongoose.model('SessionUser', sessionSchema);
