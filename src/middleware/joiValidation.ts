@@ -36,7 +36,7 @@ export const updateUserValidation = (req: Request, res: Response, next: NextFunc
             fName: SHORTSTRREQ,
             lName: SHORTSTRREQ,
             email: SHORTSTR.email({ minDomainSegments: 2 }).required(),
-            address: SHORTSTR.allow(""),
+            address: LONGSTR.allow(""),
         });
         const { error } = schema.validate(req.body);
         error ?

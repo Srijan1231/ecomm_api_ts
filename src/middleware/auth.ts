@@ -76,11 +76,11 @@ export const refreshAuth = async (req: Request, res: Response, next: NextFunctio
 
             if (user?._id) {
                 // create new accessJWT
-                const accessJWT = await createAccessJWT(decodedJWT.email);
+                const token = await createAccessJWT(decodedJWT.email);
 
                 return res.json({
                     status: "success",
-                    accessJWT,
+                    token,
                 });
             }
         }

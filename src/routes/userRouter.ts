@@ -76,11 +76,10 @@ router.post("/sign-in", loginValidation, async (req: Request, res: Response, nex
                     token: { accessJWT, refreshJWT },
                 });
             }
-        }
-        res.json({
+        } res.json({
             status: "error",
             message: "Invalid login details",
-        });
+        }).status(500);
     } catch (error: any) {
         next(error);
 

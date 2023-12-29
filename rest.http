@@ -35,6 +35,6 @@ DELETE {{rootAPI}}/users/delete
 Content-Type: application/json
 
 {
-    "_id": "658d901dde36a2dc5c7bf669",
-    "email":"a6@a.com"
+    "_id": "658e3694bc57a622d4dbc059",
+    "email":"a@a.com"
 }
