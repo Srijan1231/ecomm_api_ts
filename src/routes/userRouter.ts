@@ -10,11 +10,13 @@ const router = express.Router();
 
 router.get("/", auth, async (req: CustomRequest, res: Response, next: NextFunction) => {
     try {
+
         res.json({
             status: "success",
             message: "here is the user info",
             user: req.userInfo,
         });
+        next();
     } catch (error) {
         next(error);
     }

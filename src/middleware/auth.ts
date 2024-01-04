@@ -64,7 +64,7 @@ export const refreshAuth = async (req: Request, res: Response, next: NextFunctio
 
         //2. decode the jwt
 
-        const decodedJWT: any = verifyRefreshJWT(authorization);
+        const decodedJWT: any = await verifyRefreshJWT(authorization);
 
         // 3. extract the email and get user by email
         if (decodedJWT?.email) {
