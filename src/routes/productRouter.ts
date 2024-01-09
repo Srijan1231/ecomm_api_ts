@@ -3,7 +3,7 @@ import { getProductById, getProducts, getProductsByCategory } from '../model/pro
 
 const router = express.Router();
 
-router.get(':_id?', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/:_id?', async (req: Request, res: Response, next: NextFunction) => {
 
     try {
         const { _id } = req.params;
