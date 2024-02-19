@@ -17,6 +17,7 @@ import categoryRouter from './routes/categoryRouter.js';
 import paymentOptionRouter from './routes/paymentOptionRouter.js';
 import productRouter from './routes/productRouter.js';
 import userRouter from './routes/userRouter.js';
+import stripeRouter from './routes/stripeRouter.js';
 // import { auth } from "./middleware/authMiddleware.js";
 const api = "/api/store/ts";
 //api
@@ -24,6 +25,7 @@ app.use(api + "/category", categoryRouter);
 app.use(api + "/paymentoptions", paymentOptionRouter);
 app.use(api + "/products", productRouter);
 app.use(api + "/users", userRouter);
+app.use("/stripe", stripeRouter);
 //server
 app.get("/", (req: Request, res: Response) => {
     res.json({
