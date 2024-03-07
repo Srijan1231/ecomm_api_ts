@@ -17,10 +17,10 @@ export const getProducts = () => {
 export const getProductById = (_id: string) => {
     return product.findById(_id);
 };
-// export const getProductsByCategory = (filter) => {
-//     const _id = new mongoose.Types.ObjectId(filter);
-//     return product.find({ parentCat: _id });
-// };
+export const getProductsByCategory = (filter: string) => {
+    const _id = new mongoose.Types.ObjectId(filter);
+    return product.find({ parentCat: _id });
+};
 // export const getSingleProduct = (filter) => {
 //   return product.findOne(filter);
 // };

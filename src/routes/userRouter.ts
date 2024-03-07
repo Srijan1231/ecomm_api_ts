@@ -25,11 +25,11 @@ router.get("/", auth, async (req: CustomRequest, res: Response, next: NextFuncti
 router.post("/", newUserValidation, async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { password, ...rest } = req.body;
-        console.log(req.body);
+
         req.body.password = hashPassword(password);
 
         const result = await insertUser(req.body);
-        console.log(result);
+
 
         if (result?._id) {
             res.json({
