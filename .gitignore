@@ -4,3 +4,4 @@ dist
 /rest.http
 .gitignore
 buildspec.yml
+build

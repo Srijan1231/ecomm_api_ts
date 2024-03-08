@@ -2,11 +2,13 @@ import dotenv from "dotenv";
 dotenv.config();
 import express, { NextFunction, Request, Response } from 'express';
 import Stripe from 'stripe';
-;
+
 
 const router = express.Router();
 
 console.log(process.env.STRIPE_SECRET_KEY_TS);
+console.log(process.env.JWT_REFRESH_SECRET);
+console.log(process.env);
 if (!process.env.STRIPE_SECRET_KEY_TS) {
     throw new Error('Stripe secret key is not defined in environment variables');
 }
