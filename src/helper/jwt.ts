@@ -3,7 +3,7 @@ import { insertNewSession } from '../model/session/sessionModel.js';
 import { updateUser } from '../model/user/userModel.js';
 export const createAccessJWT = async (email: string) => {
     const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET;
-    console.log(process.env.JWT_REFRESH_SECRET);
+
     if (!JWT_ACCESS_SECRET) {
         throw Error('JWT_ACCESS not setup properly');
     }
