@@ -6,7 +6,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./build",
     "strict": true,
     "baseUrl": "./",
     // "allowImportingTsExtensions": true,
