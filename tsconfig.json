@@ -14,13 +14,14 @@
     // "emitDeclarationOnly": true,
     // "declaration": true
   },
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "out/**"
+  ],
   "include": [
-    "src/**/*"
+    "**/*.ts"
   ],
   // ts-node settings we added
-  "ts-node": {
-    "esm": true,
-    "compiler": "typescript"
-  }
   // *****************
 }
