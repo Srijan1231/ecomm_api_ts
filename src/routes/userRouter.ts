@@ -90,7 +90,7 @@ router.post("/sign-in", loginValidation, async (req: Request, res: Response, nex
 });
 router.get("/get/access_jwt", refreshAuth);
 
-router.post("/logout", async (req, res, next) => {
+router.post("/logout", async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { accessJWT, refreshJWT, _id } = req.body;
 
