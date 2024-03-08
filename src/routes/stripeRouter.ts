@@ -5,13 +5,14 @@ import Stripe from 'stripe';
 ;
 
 const router = express.Router();
-const secret_key = process.env.STRIPE_SECRET_KEY;
-if (!secret_key) {
+
+
+if (!process.env.STRIPE_SECRET_KEY) {
     throw new Error('Stripe secret key is not defined in environment variables');
 }
 
 
-const stripe = new Stripe(secret_key, {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 
     typescript: true,
 });
