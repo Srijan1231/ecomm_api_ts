@@ -9,6 +9,7 @@
     "outDir": "./build",
     "strict": true,
     "baseUrl": "./",
+    "allowJs": true,
     // "allowImportingTsExtensions": true,
     // "emitDeclarationOnly": true,
     // "declaration": true
